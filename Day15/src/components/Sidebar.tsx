@@ -1,5 +1,6 @@
+import { cn } from "@/lib/utils"
 import { LayoutDashboard, Users, Briefcase, BarChartIcon, Settings } from "lucide-react"
-import { Link, Outlet } from "react-router-dom"
+import { Link, Outlet, useLocation } from "react-router-dom"
 
 const sidebarItems = [
     { icon: LayoutDashboard, label: 'Dashboard' },
@@ -11,6 +12,8 @@ const sidebarItems = [
 
 
 export function Sidebar() {
+    const {pathname} = useLocation()
+    // console.log({pathname}) to check pathname URL
     return (
         <div className="flex h-screen bg-gray-100">
 
@@ -23,7 +26,7 @@ export function Sidebar() {
                         <a
                             key={index}
                             href="#"
-                            className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-gray-800 transition-colors duration-200"
+                            className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-100 bg-purple-400transition-colors duration-200 "
                         >
                             <item.icon className="h-5 w-5 mr-3" />
                             {item.label}
@@ -33,13 +36,13 @@ export function Sidebar() {
 
                 <nav className="mt-6">
                     <Link to="/dashboard"
-                        className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-gray-800 transition-colors duration-200">
+                        className={cn(["flex items-center px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-gray-800 transition-colors duration-200", { "bg-purple-500 text-primary-foreground": pathname === '/dashboard'}, ])}>
                         <Users className="h-5 w-5 mr-3" />
                         Dashboard
                     </Link>
 
                     <Link to="/users"
-                        className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-gray-800 transition-colors duration-200">
+                        className={cn(["flex items-center px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-gray-800 transition-colors duration-200", { "bg-purple-500 text-primary-foreground": pathname === '/users'}, ])}>
                         <Users className="h-5 w-5 mr-3" />
                         Users
                     </Link>
@@ -66,3 +69,14 @@ export function Sidebar() {
 
     )
 }
+
+//dashbord ma  select garda select vako dekhana css color state bata dekhauna ta sakin6 tara , refresh garda state udd6. 
+//refrheh garda pani rakhnalai Url bata rakkhda ramro. react hook useLocation use garum .
+//suruma const a = useLocation() matra garum , uselocation vitra jam, highlight n double click. feri uselocation vitra use garum. ma vako location ma jam , teha hami dekhna 
+//sakin6 object {} aaaune roicha
+//aba {} object vitra control + space garum. we can see pathname and other details.we need pathname
+//console.log({pathname})
+//pathname '/dashboard' ani users ma huda '/users' cha.So pathname ko value herera selection garauna milyo
+//lib vitra utils 6, tesma cn 6 tesle classValue lin6, classarray vtra, classsobj rakhna mil6. So,
+// className={cn(["flex items-center px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-gray-800 transition-colors duration-200", { "bg-purple-500 text-primary-foreground": "pathname === '/dashboard'"}, ])}>
+//yo css , yo pathname Url huda vane conditionally render garauna milyo.
