@@ -7,6 +7,7 @@ import { Sidebar } from './components/Sidebar'
 import { ThemeProvider } from './components/theme-provider'
 import { Button } from './components/ui/button'
 import { UsersPage } from './components/UsersPage'
+import { Toaster } from './components/ui/toaster'
 
 function App() {
 
@@ -34,6 +35,8 @@ function App() {
               <Route path='/users' element={<UsersPage />} />
             </Route>
           </Routes>
+          <Toaster />
+          <ModeToggle />
         </BrowserRouter>
       </>
     </ThemeProvider>
